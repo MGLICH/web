@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <title>chatSocketAchex.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+
+      <style>
+ 
+/**
+  * Based on https://github.com/tshedor/workshop-wp-theme (Example: http://workshop.kansan.com/category/sessions/basics or http://workshop.timshedor.com/category/sessions/basics);
+ * @author Tim  Shedor
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	font-family: Consolas, Monaco, 'Andale Mono', monospace;
+	direction: ltr;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	position: relative;
+	margin: .5em 0;
+	-webkit-box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
+	-moz-box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
+	box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
+	border-left: 10px solid #358ccb;
+	background-color: #fdfdfd;
+	background-image: -webkit-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-image: -moz-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-image: -ms-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-image: -o-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-image: linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-size: 3em 3em;
+	background-origin: content-box;
+	overflow: visible;
+	max-height: 30em;
+}
+
+code[class*="language"] {
+	max-height: inherit;
+	height: 100%;
+	padding: 0 1em;
+	display: block;
+	overflow: auto;
+}
+
+/* Margin bottom to accomodate shadow */
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background-color: #fdfdfd;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-bottom: 1em;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	position: relative;
+	padding: .2em;
+	-webkit-border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-ms-border-radius: 0.3em;
+	-o-border-radius: 0.3em;
+	border-radius: 0.3em;
+	color: #c92c2c;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+pre[class*="language-"]:before,
+pre[class*="language-"]:after {
+	content: '';
+	z-index: -2;
+	display: block;
+	position: absolute;
+	bottom: 0.75em;
+	left: 0.18em;
+	width: 40%;
+	height: 20%;
+	-webkit-box-shadow: 0px 13px 8px #979797;
+	-moz-box-shadow: 0px 13px 8px #979797;
+	box-shadow: 0px 13px 8px #979797;
+	-webkit-transform: rotate(-2deg);
+	-moz-transform: rotate(-2deg);
+	-ms-transform: rotate(-2deg);
+	-o-transform: rotate(-2deg);
+	transform: rotate(-2deg);
+}
+
+:not(pre) > code[class*="language-"]:after,
+pre[class*="language-"]:after {
+	right: 0.75em;
+	left: auto;
+	-webkit-transform: rotate(2deg);
+	-moz-transform: rotate(2deg);
+	-ms-transform: rotate(2deg);
+	-o-transform: rotate(2deg);
+	transform: rotate(2deg);
+}
+
+ 
+
+.namespace {
+	opacity: .7;
+}
+
+@media screen and (max-width: 767px) {
+	pre[class*="language-"]:before,
+	pre[class*="language-"]:after {
+		bottom: 14px;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+	}
+
+}
+
+/* Plugin styles */
+.token.tab:not(:empty):before,
+.token.cr:before,
+.token.lf:before {
+	color: #e0d7d1;
+}
+
+/* Plugin styles: Line Numbers */
+pre[class*="language-"].line-numbers {
+	padding-left: 0;
+}
+
+pre[class*="language-"].line-numbers code {
+	padding-left: 3.8em;
+}
+
+pre[class*="language-"].line-numbers .line-numbers-rows {
+	left: 0;
+}
+
+/* Plugin styles: Line Highlight */
+pre[class*="language-"][data-line] {
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+}
+pre[data-line] code {
+	position: relative;
+	padding-left: 4em;
+}
+pre .line-highlight {
+	margin-top: 0;
+}
+</style>
+ 
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ 
+      
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script>
+// src="chatSocketAchex.js"
+
+
+$.fn.extend({ChatSocket: function(opciones) {
+					var ChatSocket=this;
+				
+                    var idChat=$(ChatSocket).attr('id');
+					defaults = {
+		                  ws,
+                          Room:"RoomMRDURSTintG001",
+                          pass:"jhfjHlsFF2230x",
+                          lblTitulChat:" getraenke-gilch.de ",
+                          lblCampoEntrada:"Message",
+                          lblSenden:"Send",
+                          textoAyuda:myUrlImg ()+"&ahnung=zzt",
+                          Nombre:"Anonym",                          
+                          urlImg:myUrlImg (),
+                          btnEntrar:"btnEntrar",
+                          btnSenden:"btnSenden",
+                          lblBtnSenden:"Senden",
+                          lblTxtEntrar:"txtEntrar",
+                          lblTxtSenden:"txtMessage",
+                          lblBtnEntrar:"Enter",
+                          idDialogo:"DialogoEntrada",
+                          classChat:"",
+                          idOnline:"ListaOnline",
+                          lblUsuariosOnline:"Users joined: <span id='totalusr'>0</span>",
+                        lblEntradaNombre:"Name:",
+                        panelColor:"success"
+        			}
+					
+                     var opciones = $.extend({}, defaults, opciones);
+		
+                     var ws;
+                     var Room=opciones.Room;
+                     var pass=opciones.pass;
+                     var lblTitulChat=opciones.lblTitulChat;
+                     var lblCampoEntrada=opciones.lblCampoEntrada;
+                     var lblSenden=opciones.lblBtnSenden;
+                     var textoAyuda=opciones.textoAyuda;
+                     var Nombre=opciones.Nombre;
+                     
+                     var urlImg=opciones.urlImg;
+                     var btnEntrar=opciones.btnEntrar;
+                     var btnSenden=opciones.btnSenden;
+                     var lblBtnSenden=opciones.lblBtnSenden;
+                     var lblTxtEntrar=opciones.lblTxtEntrar;
+                     var lblTxtSenden=opciones.lblTxtSenden;
+                     var lblBtnEntrar=opciones.lblBtnEntrar;
+                     var idDialogo=opciones.idDialogo;
+                     var classChat=opciones.classChat;
+                     var idOnline=opciones.idOnline;
+                     var lblUsuariosOnline=opciones.lblUsuariosOnline;
+                     var lblEntradaNombre=opciones.lblEntradaNombre;
+                     var panelColor=opciones.panelColor;
+                    if( $('#'+idOnline).length==0 )
+                    {
+                     idOnline=idChat+"listaOnline";
+                        $('#'+idChat).append('<br/><div id="'+idOnline+'"></div>');
+                        
+                    }
+    
+    
+    // SERVER : ws://achex.ca:4010
+
+            function IniciarConexion(){
+                    conex='{"setID":"'+Room+'","passwd":"'+pass+'"}';
+                    ws= new WebSocket("ws://achex.ca:4010");
+                    ws.onopen= function(){ ws.send(conex); }
+                    ws.onmessage= function(Messages){
+                    var MessagesObtenidos=Messages.data;
+                    var obj = jQuery.parseJSON(MessagesObtenidos);
+                    AgregarItem(obj);
+                    
+                    if(obj.sID!=null){
+                        
+                                                      
+                    if( $('#'+obj.sID).length==0 )
+                    {
+                   var intx =   $('#totalusr').text();
+                            $('#totalusr').text(1+(intx *1) );
+                      $('#listaOnline').append('<li class="list-group-item" id="'+obj.sID+'"><span class="label label-success">'+myIcon  +'</span> - '+obj.Nombre+'</li>');
+                        
+                    }
+                     
+                    }
+                    
+                }
+                ws.onclose= function(){
+                    alert("Conexión cerrada");
+                }
+          }
+           IniciarConexion();
+          function iniciarChat(){
+            Nombre=$('#'+lblTxtEntrar).val();
+            $('#'+idDialogo).hide();
+              $('#'+idOnline).show();
+           
+        var  newTEXTe ="ccccccccccc";
+            CrearChat();  
+            UsuarioOnline();
+            getOnline();
+          }
+           
+          function CrearEntrada(){
+          $('#'+idChat).append('<div id="'+idDialogo+'" class="'+classChat+'" id="InputNombre"><div class="panel-footer" style="margin-top:100px;"><div class="input-group"><input id="'+lblTxtEntrar+'" type="text" class="form-control input-sm" value="'+lblEntradaNombre+'"><span class="input-group-btn"><button id="'+btnEntrar+'" class="btn btn-success btn-sm" >'+lblBtnEntrar+'</button></span></div></div></div>');
+         $('#'+idOnline).append(' <div class="panel panel-'+panelColor+'"><div class="panel-heading"><span class="glyphicon glyphicon-user"></span> '+lblUsuariosOnline+'</div><div class="panel-body"><ul class="list-group" id="listaOnline"></ul></div><div class="panel-footer"><div class="input-group"><div><a href="http://www.getraenke-gilch.de"> Getränke-Gilch</a></div></span></div></div></div>');
+              $("#"+lblTxtEntrar).keyup(function (e) {if (e.keyCode == 13) { iniciarChat(); }});
+              $("#"+btnEntrar).click(function(){
+              iniciarChat();
+              });
+        }
+          function CrearChat(){
+             $('#'+idChat ).append( '<div class="'+classChat+'"><div class="panel panel-'+panelColor+'"><div class="panel-heading"><span class="glyphicon glyphicon-comment"></span>'+lblTitulChat+" : "+Nombre+'<div class="btn-group pull-right"><button type="button" onclick="alert(\''+textoAyuda+'\')" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button></div></div><div class="panel-body"><ul class="chatpluginchat"></ul></div><div class="panel-footer"><div class="input-group"><input id="'+lblTxtSenden+'" type="text" class="form-control input-sm inputyyy" value="2222222222" /><span class="input-group-btn"><button  class="btn btn-warning btn-sm" id="'+btnSenden+'">'+lblSenden+'</button></span></div></div></div></div><li class="left clearfix itemtemplate" style="display:none"><span class="chat-img pull-left"><img src="'+urlImg+'" alt="User Avatar" class="img-circle" id="Foto"/></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font" id="Nombre">Nombre</strong><small class="pull-right text-muted"><span class="glyphicon glyphicon-asterisk"></span><span id="Tiempo">12 mins ago</span></small></div> <p id="Contenido">Contenido</p></div></li>');
+              
+    $("#"+lblTxtSenden).keyup(function (e) {if (e.keyCode == 13) { SendenMessage();}});
+    $("#"+btnSenden).click(function () {SendenMessage();});
+              
+        }
+     
+        function SendenMessage(){
+           ws.send('{"to":"'+Room+'","Nombre":"'+Nombre+'","Contenido":"'+$('#'+lblTxtSenden).val()+'"}');
+        $("#"+lblTxtSenden).val('');
+          
+        };
+
+        function SendenMyMessage(){
+           ws.send('{"to":"'+Room+'","Nombre":"'+Nombre+'","Contenido":"'+$('#'+lblTxtSenden).val()+'"}');
+        $("#"+lblTxtSenden).val('');
+          
+        };
+        function UsuarioOnline(){
+           ws.send('{"to":"'+Room+'","Nombre":"'+Nombre+'"}');
+        }
+        function AgregarItem(Obj){
+            
+            if((Obj.Contenido!=null)&&(Obj.Nombre!=null)){
+                
+            $( ".itemtemplate" ).clone().appendTo( ".chatpluginchat" );
+            $('.chatpluginchat .itemtemplate').show(10);
+            $('.chatpluginchat .itemtemplate #Nombre').html(Obj.Nombre);
+            $('.chatpluginchat .itemtemplate #Contenido').html(Obj.Contenido);
+             
+             var formattedDate = new Date();
+             var d = formattedDate.getUTCDate();
+             var m =  formattedDate.getMonth();
+             var y = formattedDate.getFullYear();
+             var h= formattedDate.getHours();
+             var min= formattedDate.getMinutes();
+            
+            Fecha=d+"/"+m+"/"+y+" "+h+":"+min;
+            
+            $('.chatpluginchat .itemtemplate #Tiempo').html(Fecha);
+            $('.chatpluginchat .itemtemplate').removeClass("itemtemplate");
+            }
+        }
+           function getOnline() {
+                setInterval(UsuarioOnline, 5000);
+            }
+           
+         
+         CrearEntrada();
+    // Fin
+    
+	}
+});
+</script>
+<script>
+
+ var myIcon  =  "🏋️‍";
+ var myName  = "Markus‍";
+
+
+const myUrlImg = ()  => { return  "http://placehold.it/50/55C1E7/fff&text="+myName; }
+</script>
+       <style>
+.chatpluginchat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chatpluginchat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+.chatpluginchat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chatpluginchat li.right .chat-body
+{
+    margin-right: 60px;
+}
+
+
+.chatpluginchat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+.panel .slidedown .glyphicon, .chatpluginchat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.panel-body
+{
+    overflow-y: scroll;
+    height: 250px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+</style>
+             
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 text-center">
+         
+
+ 
+                 </div>  
+          </div>
+            
+    <div class="col-md-8">
+        <br/> 
+        <h1 class="text-center"><span style="color:#449D44">Getränke Gilch</span>Status & Info</h1>
+ 
+        <div class="row alert alert-info">
+        
+         <div class="col-lg-4">
+            <div id="ListaOnline">
+               
+            </div>
+            
+         </div>   
+         
+          <div class="col-lg-8">            
+          <div id="Elchat"></div>
+          </div>   
+</div> 
+        
+      <script type="text/javascript">
+var  proptname=  prompt('finalname:',  'MG_mob');
+           $('#Elchat').ChatSocket({'lblEntradaNombre': proptname});
+
+
+        </script>
+             
+          <div class="panel panel-default">
+            <div class="panel-heading"><h1>&nbsp;</h1></div>
+        </div>
+    </div>
+    
+        </div>
+    </div>
+<button onClick=" $('input')[1].value='2x2';">2c2</button>
+<button onClick=' $("#"+btnSenden).click()'>CHat Ini</button>
+  </body>
+
+<script type="text/javascript">
+      
+        </script>
+</html>
+
