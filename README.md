@@ -1,6 +1,6 @@
 # PWAmp app demo
-
-➡️ **[Open the demo](https://microsoftedge.github.io/Demos/pwamp/)** ⬅️
+ 
+➡️ **[Open the demo](https://MGLICH.github.io/web/pwamp/)** ⬅️
 
 PWAmp (pronounced P-W-Amp) is a web audio player demo application. It is an installable web app (PWA) specifically made to demonstrate desktop-integration features.
 
