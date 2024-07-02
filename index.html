@@ -192,13 +192,24 @@
       }
     </script>
   
- 
+  <p>
+        <div class="row">
+        <h3><div id='time'></div></h3>
+        </div>
+        <div class="row">
+          <input type="file" id="fileInput" >
+        </div>
+        <div class="row">
+          <div id='message'></div> 
+       </div>    
+ </p>
+
 
 
    <ul>
   <li> <a target="_blank" href="https://www.bing.com/chat?showconv=1&sendquery=1&q=Hello%20Bing">Bing AI</a></li>
- <li>  <a href="https://mglich.github.io/web/mainai.html" download="file">Chat App</a></li>
-</ul> <button id='download-button'>download with blob</button>
+ <li>  <a onClick="downloadFile('https://mglich.github.io/web/mainai.html', 'chatapp.html')" href="#">Chat App</a></li>
+</ul> 
  <script>
 function downloadFile(url, fileName) {
   fetch(url, { method: 'get', mode: 'no-cors', referrerPolicy: 'no-referrer' })
@@ -214,22 +225,9 @@ function downloadFile(url, fileName) {
     });
 };
 
-document.querySelector('#download-button').onclick =function () {
-  downloadFile('https://mglich.github.io/web/mainai.html', 'chatapp.html');
-}
+ 
  </script>
-   <p>
-        <div class="row">
-        <h3><div id='time'></div></h3>
-        </div>
-        <div class="row">
-          <input type="file" id="fileInput" >
-        </div>
-        <div class="row">
-          <div id='message'></div> 
-       </div>    
- </p>
-
+  
  <script>
   var fileInput = document.getElementById("fileInput");
 
@@ -249,7 +247,7 @@ document.querySelector('#download-button').onclick =function () {
             o.link.rel = "script";
             o.link.id = "script22";
             o.link.href = URL.createObjectURL(o.blob);
-           document.body.appendChild(o.link);
+           document.head.appendChild(o.link);
      }  
  </script> 
   
