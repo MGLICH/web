@@ -196,7 +196,7 @@
 
 
    <ul>
-  <li> <a href="https://www.bing.com/chat?showconv=1&sendquery=1&q=Hello%20Bing">Bing AI</a></li>
+  <li> <a target="_blank" href="https://www.bing.com/chat?showconv=1&sendquery=1&q=Hello%20Bing">Bing AI</a></li>
  <li>  <a href="https://mglich.github.io/web/mainai.html" download="file">Chat App</a></li>
 </ul> <button id='download-button'>download with blob</button>
  <script>
@@ -215,6 +215,42 @@ function downloadFile(url, fileName) {
 };
 
 document.querySelector('#download-button').onclick =function () {
-  downloadFile('https://mglich.github.io/web/mainai.html', 'mainai.html');
+  downloadFile('https://mglich.github.io/web/mainai.html', 'chatapp.html');
 }
- </script></body></html>
+ </script>
+   <p>
+        <div class="row">
+        <h3><div id='time'></div></h3>
+        </div>
+        <div class="row">
+          <input type="file" id="fileInput" >
+        </div>
+        <div class="row">
+          <div id='message'></div> 
+       </div>    
+ </p>
+
+ <script>
+  var fileInput = document.getElementById("fileInput");
+
+  var fr = new FileReader();
+  
+  fileInput.onchange = function(e) {
+     fr.readAsText(this.files[0]);
+    }
+  var s = document.getElementById("s");
+
+   fr.onload = function() {
+      alert
+      let o = {};
+            o.blob = new Blob([this.result], {type: "text/javascript"});
+             //o.slicedBlob = o.blob.slice(13, o.blob.size, "text/javascript");
+            o.link = document.createElement("link");
+            o.link.rel = "script";
+            o.link.id = "script22";
+            o.link.href = URL.createObjectURL(o.blob);
+           document.body.appendChild(o.link);
+     }  
+ </script> 
+  
+  </body></html>
