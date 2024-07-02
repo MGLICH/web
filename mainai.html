@@ -296,7 +296,11 @@ myIcon  = otherIcon.split(",")[intx *1];
           
         };
 
-  
+        function SendenMyMessage(){
+           ws.send('{"to":"'+Room+'","Nombre":"'+Nombre+'","Contenido":"'+$('#'+lblTxtSenden).val()+'"}');
+        $("#"+lblTxtSenden).val('');
+          
+        };
         function UsuarioOnline(){
            ws.send('{"to":"'+Room+'","Nombre":"'+Nombre+'"}');
         }
@@ -311,12 +315,12 @@ myIcon  = otherIcon.split(",")[intx *1];
              
              var formattedDate = new Date();
              var d = formattedDate.getUTCDate();
-             var m =  formattedDate.getMonth()+1;
+             var m =  formattedDate.getMonth();
              var y = formattedDate.getFullYear();
              var h= formattedDate.getHours();
              var min= formattedDate.getMinutes();
             
-            Fecha=">"+d+"."+m+"."+y+" "+h+":"+min;
+            Fecha=d+"/"+m+"/"+y+" "+h+":"+min;
             
             $('.chatpluginchat .itemtemplate #Tiempo').html(Fecha);
             $('.chatpluginchat .itemtemplate').removeClass("itemtemplate");
@@ -436,14 +440,12 @@ a{
 </div> 
         
       <script type="text/javascript">
-//var  proptname=  prompt('finalname:',  myName);
-  var  proptname= myName;
-     try {    $('#Elchat').ChatSocket({'lblEntradaNombre': proptname});
+var  proptname=  prompt('finalname:',  myName);
+       try {    $('#Elchat').ChatSocket({'lblEntradaNombre': proptname});
 	} catch(f){console.log('error #Elchat.ChatSocket')} ;
-     try {    $('#btnEntrar').click()
-	} catch(f){console.log('error #Elchat.ChatSocket')} ;
-   try {  $('#btnSenden').click() 
-	} catch(f){console.log('error imesst')} ;
+  try { $('#btnEntrar').click() } catch(f){console.log('error btnEntrar')} ;
+try { SendenMessage()} catch(f){console.log(f.message)}
+
         </script>
              
           <div class="panel panel-default">
@@ -453,13 +455,11 @@ a{
     
         </div>
     </div>
-<div id="iende"> </div>
  <script type="text/javascript">
  
  function apiCall() {
 (async () => {
     var resp = await fetch(`https://script.google.com/macros/s/AKfycbyG_q2X_5K_UYP9nqPI7Lh0ZophIQK5v3bcnCkt4lges1vqcz4AdFQ3Ji8-SiarB9D7qA/exec?uri=zz11222`);  
-
     var jobj = await resp.json();  
     var display = jobj.data;  
     console.log(display);
@@ -467,7 +467,7 @@ a{
  }
         </script>
 <button id="imessage"  onClick=" $('input')[1].value='Ich bin jetzt dabei';">Ich bin jetzt dabei</button>
-<button  id="ibutton" onClick=" document.getElementById('imessage').click(); btnSenden.click();apiCall()">X </button>
+<button  onClick=" document.getElementById('imessage').click(); btnSenden.click()">X </button>
 <button  onClick="apiCall()">y </button>
      
   </body>
@@ -783,6 +783,6 @@ a{
             function deleteNote(dateTime) {
               localStorage.removeItem('note-' + dateTime); 
             }
- 
+
         </script>
 </html>
