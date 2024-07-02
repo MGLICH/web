@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
   <head>
@@ -6,13 +5,9 @@
     <title>chatSocketAchex.js</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- bootstrap -->
-
-      <style>
+  <style>
  
-/**
-  * Based on https://github.com/tshedor/workshop-wp-theme (Example: http://workshop.kansan.com/category/sessions/basics or http://workshop.timshedor.com/category/sessions/basics);
- * @author Tim  Shedor
- */
+ 
 
 code[class*="language-"],
 pre[class*="language-"] {
@@ -179,17 +174,16 @@ pre .line-highlight {
 
 
 $.fn.extend({ChatSocket: function(opciones) {
-					var ChatSocket=this;
-				
+	var ChatSocket=this;				
                     var idChat=$(ChatSocket).attr('id');
-					defaults = {
-		                  ws,
+	defaults = { ws,
                           Room:"RoomMRDURSTintG001",
                           pass:"jhfjHlsFF2230x",
-                          lblTitulChat:" getraenke-gilch.de ",
+                          lblTitulChat:" Chats für ",
                           lblCampoEntrada:"Message",
                           lblSenden:"Send",
-                          textoAyuda:myUrlImg ()+"&ahnung=zzt",
+                          textoAyuda:myUrlImg(),
+ /*+"&ahnung=zzt",*/
                           Nombre:"Anonym",                          
                           urlImg:myUrlImg (),
                           btnEntrar:"btnEntrar",
@@ -206,8 +200,7 @@ $.fn.extend({ChatSocket: function(opciones) {
                         panelColor:"success"
         			}
 					
-                     var opciones = $.extend({}, defaults, opciones);
-		
+                     var opciones = $.extend({}, defaults, opciones);		
                      var ws;
                      var Room=opciones.Room;
                      var pass=opciones.pass;
@@ -215,8 +208,7 @@ $.fn.extend({ChatSocket: function(opciones) {
                      var lblCampoEntrada=opciones.lblCampoEntrada;
                      var lblSenden=opciones.lblBtnSenden;
                      var textoAyuda=opciones.textoAyuda;
-                     var Nombre=opciones.Nombre;
-                     
+                     var Nombre=opciones.Nombre;                     
                      var urlImg=opciones.urlImg;
                      var btnEntrar=opciones.btnEntrar;
                      var btnSenden=opciones.btnSenden;
@@ -256,7 +248,10 @@ $.fn.extend({ChatSocket: function(opciones) {
                     {
                    var intx =   $('#totalusr').text();
                             $('#totalusr').text(1+(intx *1) );
-                      $('#listaOnline').append('<li class="list-group-item" id="'+obj.sID+'"><span class="label label-success">'+myIcon  +'</span> - '+obj.Nombre+'</li>');
+ $('#listaOnline').append('<li class="list-group-item" id="'+obj.sID+'"><span style="; padding:1px;font-size:1.5em;" class="label label-success">'+myIcon+ '</span><span style="background:black;color:white; padding:1px;font-size:1.5em;" >'+intx +'</span>  - '+obj.Nombre+'</li>');
+myIcon  = otherIcon.split(",")[intx *1];
+	 
+ 
                         
                     }
                      
@@ -281,14 +276,14 @@ $.fn.extend({ChatSocket: function(opciones) {
            
           function CrearEntrada(){
           $('#'+idChat).append('<div id="'+idDialogo+'" class="'+classChat+'" id="InputNombre"><div class="panel-footer" style="margin-top:100px;"><div class="input-group"><input id="'+lblTxtEntrar+'" type="text" class="form-control input-sm" value="'+lblEntradaNombre+'"><span class="input-group-btn"><button id="'+btnEntrar+'" class="btn btn-success btn-sm" >'+lblBtnEntrar+'</button></span></div></div></div>');
-         $('#'+idOnline).append(' <div class="panel panel-'+panelColor+'"><div class="panel-heading"><span class="glyphicon glyphicon-user"></span> '+lblUsuariosOnline+'</div><div class="panel-body"><ul class="list-group" id="listaOnline"></ul></div><div class="panel-footer"><div class="input-group"><div><a href="http://www.getraenke-gilch.de"> Getränke-Gilch</a></div></span></div></div></div>');
+         $('#'+idOnline).append(' <div class="panel panel-'+panelColor+'"><div class="panel-heading"><span class="glyphicon glyphicon-user"></span> '+lblUsuariosOnline+'</div><div class="panel-body"><ul class="list-group" id="listaOnline"></ul></div><div class="panel-footer"><div class="input-group"><div><a href="https://mglich.github.io/web/">  Github</a></div></span></div></div></div>');
               $("#"+lblTxtEntrar).keyup(function (e) {if (e.keyCode == 13) { iniciarChat(); }});
               $("#"+btnEntrar).click(function(){
               iniciarChat();
               });
         }
           function CrearChat(){
-             $('#'+idChat ).append( '<div class="'+classChat+'"><div class="panel panel-'+panelColor+'"><div class="panel-heading"><span class="glyphicon glyphicon-comment"></span>'+lblTitulChat+" : "+Nombre+'<div class="btn-group pull-right"><button type="button" onclick="alert(\''+textoAyuda+'\')" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button></div></div><div class="panel-body"><ul class="chatpluginchat"></ul></div><div class="panel-footer"><div class="input-group"><input id="'+lblTxtSenden+'" type="text" class="form-control input-sm inputyyy" value="2222222222" /><span class="input-group-btn"><button  class="btn btn-warning btn-sm" id="'+btnSenden+'">'+lblSenden+'</button></span></div></div></div></div><li class="left clearfix itemtemplate" style="display:none"><span class="chat-img pull-left"><img src="'+urlImg+'" alt="User Avatar" class="img-circle" id="Foto"/></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font" id="Nombre">Nombre</strong><small class="pull-right text-muted"><span class="glyphicon glyphicon-asterisk"></span><span id="Tiempo">12 mins ago</span></small></div> <p id="Contenido">Contenido</p></div></li>');
+             $('#'+idChat ).append( '<div class="'+classChat+'"><div class="panel panel-'+panelColor+'"><div class="panel-heading"><span class="glyphicon glyphicon-comment"></span>'+lblTitulChat+" : "+Nombre+'<div class="btn-group pull-right"><button type="button" onclick="alert(\''+textoAyuda+'\')" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-chevron-down"></span></button></div></div><div class="panel-body"><ul class="chatpluginchat"></ul></div><div class="panel-footer"><div class="input-group"><input id="'+lblTxtSenden+'" type="text" class="form-control input-sm inputyyy" value="2222222222" /><span class="input-group-btn"><button  class="btn btn-warning btn-sm" id="'+btnSenden+'">'+lblSenden+'</button></span></div></div></div></div><li class="left clearfix itemtemplate" style="display:none"><span class="chat-img pull-left"><img src="'+urlImg+'" alt="Usr" class="img-circle" id="Foto"/></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font" id="Nombre">Nombre</strong><small class="pull-right text-muted"><span class="glyphicon glyphicon-asterisk"></span><span id="Tiempo">12 mins ago</span></small></div> <p id="Contenido">Contenido</p></div></li>');
               
     $("#"+lblTxtSenden).keyup(function (e) {if (e.keyCode == 13) { SendenMessage();}});
     $("#"+btnSenden).click(function () {SendenMessage();});
@@ -301,11 +296,7 @@ $.fn.extend({ChatSocket: function(opciones) {
           
         };
 
-        function SendenMyMessage(){
-           ws.send('{"to":"'+Room+'","Nombre":"'+Nombre+'","Contenido":"'+$('#'+lblTxtSenden).val()+'"}');
-        $("#"+lblTxtSenden).val('');
-          
-        };
+  
         function UsuarioOnline(){
            ws.send('{"to":"'+Room+'","Nombre":"'+Nombre+'"}');
         }
@@ -315,17 +306,17 @@ $.fn.extend({ChatSocket: function(opciones) {
                 
             $( ".itemtemplate" ).clone().appendTo( ".chatpluginchat" );
             $('.chatpluginchat .itemtemplate').show(10);
-            $('.chatpluginchat .itemtemplate #Nombre').html(Obj.Nombre);
+            $('.chatpluginchat .itemtemplate #Nombre').html(Obj.Nombre);alert(Obj.Nombre);
             $('.chatpluginchat .itemtemplate #Contenido').html(Obj.Contenido);
              
              var formattedDate = new Date();
              var d = formattedDate.getUTCDate();
-             var m =  formattedDate.getMonth();
+             var m =  formattedDate.getMonth()+1;
              var y = formattedDate.getFullYear();
              var h= formattedDate.getHours();
              var min= formattedDate.getMinutes();
             
-            Fecha=d+"/"+m+"/"+y+" "+h+":"+min;
+            Fecha=">"+d+"."+m+"."+y+" "+h+":"+min;
             
             $('.chatpluginchat .itemtemplate #Tiempo').html(Fecha);
             $('.chatpluginchat .itemtemplate').removeClass("itemtemplate");
@@ -343,12 +334,14 @@ $.fn.extend({ChatSocket: function(opciones) {
 });
 </script>
 <script>
+var otherIcon  =  "😎‍,🚚‍,🚒‍,🏍‍,😎‍,😎‍,😎‍,😎‍,😎‍,😎‍";
 
- var myIcon  =  "🏋️‍";
+ 
+ var myIcon  ="🏋️";
  var myName  = "Markus‍";
+let uriText = encodeURI(myIcon);
 
-
-const myUrlImg = ()  => { return  "http://placehold.it/50/55C1E7/fff&text="+myName; }
+const myUrlImg = (x)  => {  return "" } // "http://placehold.it/50/55C1E7/fff&text="+x;}
 </script>
        <style>
 .chatpluginchat
@@ -400,7 +393,7 @@ const myUrlImg = ()  => { return  "http://placehold.it/50/55C1E7/fff&text="+myNa
 }
 
 ::-webkit-scrollbar
-{
+a{
     width: 12px;
     background-color: #F5F5F5;
 }
@@ -426,7 +419,7 @@ const myUrlImg = ()  => { return  "http://placehold.it/50/55C1E7/fff&text="+myNa
             
     <div class="col-md-8">
         <br/> 
-        <h1 class="text-center"><span style="color:#449D44">Getränke Gilch</span>Status & Info</h1>
+  
  
         <div class="row alert alert-info">
         
@@ -443,25 +436,353 @@ const myUrlImg = ()  => { return  "http://placehold.it/50/55C1E7/fff&text="+myNa
 </div> 
         
       <script type="text/javascript">
-var  proptname=  prompt('finalname:',  'MG_mob');
-           $('#Elchat').ChatSocket({'lblEntradaNombre': proptname});
-
-
+//var  proptname=  prompt('finalname:',  myName);
+  var  proptname= myName;
+     try {    $('#Elchat').ChatSocket({'lblEntradaNombre': proptname});
+	} catch(f){console.log('error #Elchat.ChatSocket')} ;
+     try {    $('#btnEntrar').click()
+	} catch(f){console.log('error #Elchat.ChatSocket')} ;
+   try {  $('#btnSenden').click() 
+	} catch(f){console.log('error imesst')} ;
         </script>
              
           <div class="panel panel-default">
             <div class="panel-heading"><h1>&nbsp;</h1></div>
         </div>
-    </div>
+  </div>
     
         </div>
     </div>
-<button onClick=" $('input')[1].value='2x2';">2c2</button>
-<button onClick=' $("#"+btnSenden).click()'>CHat Ini</button>
+<div id="iende"> </div>
+ <script type="text/javascript">
+ 
+ function apiCall() {
+(async () => {
+    var resp = await fetch(`https://script.google.com/macros/s/AKfycbyG_q2X_5K_UYP9nqPI7Lh0ZophIQK5v3bcnCkt4lges1vqcz4AdFQ3Ji8-SiarB9D7qA/exec?uri=zz11222`);  
+
+    var jobj = await resp.json();  
+    var display = jobj.data;  
+    console.log(display);
+})();
+ }
+        </script>
+<button id="imessage"  onClick=" $('input')[1].value='Ich bin jetzt dabei';">Ich bin jetzt dabei</button>
+<button  id="ibutton" onClick=" document.getElementById('imessage').click(); btnSenden.click();apiCall()">X </button>
+<button  onClick="apiCall()">y </button>
+     
   </body>
 
-<script type="text/javascript">
-      
+
+<style>
+  <style>
+  .containerX * {
+        list-style: none;
+        padding: 0;
+    }
+    
+ .containerX *   p {
+        color: #444;
+    }
+    
+.containerX *  button:focus {
+        outline: 0;
+    }
+    
+    .containerX {
+        
+        margin: 0 auto;
+        padding: 10px 50px;
+        text-align: center;
+        
+        
+    }
+    
+    .containerX h1 {
+        margin-bottom: 5px;
+    }
+    
+   .containerX * .page-description {
+        font-size: 1.1rem;
+        margin: 0 auto;
+    }
+    
+   .containerX * .tz-link {
+        font-size: 1em;
+        color: #1da7da;
+        text-decoration: none;
+    }
+    
+  .no-browser-support {
+        display: none;
+        font-size: 1.2rem;
+        color: #e64427;
+        margin-top: 35px;
+    }
+    
+  .containerX *  .app {
+        margin: 2px 1px;
+    }
+    
+  .containerX *  #note-textarea {
+        margin: 5px 0;
+        min-width: 50%;
+        font-size: 1.2rem; 
+    }
+    
+  .containerX *  #recording-instructions {
+        margin: 15px auto 20px;
+    }
+    
+  .containerX *  #notes {
+        list-style: none;
+         padding-top: 10px;
+         
+    }
+  .containerX *   .note  {
+      background-color: lightblue;
+      border-style: 3px dotted red;
+      border-radius: 15px;
+      margin-right: 10%;
+     }
+  .containerX *  .note .header {
+        font-size: 0.9em;
+        color: #888;
+        margin-bottom: 10px;
+    }
+    
+   .containerX * .note .delete-note,
+   .containerX * .note .listen-note,
+   .containerX * .note .sel-note {
+        text-decoration: none;
+        margin-left: 15px;
+    }
+</style>
+
+ <div id="conta_x" class="containerX">
+            <div class="app"> 
+                 <div class="input-single">
+                    <textarea id="note-textarea" placeholder="Nachricht tippen und/oder einsprechen" rows="3"></textarea>
+                </div>         
+                <button id="start-record-btn" title="Start Recording">Starte🔊</button>
+                <button id="pause-record-btn" title="Pause Recording">Pause 🔇</button>
+                <button id="save-note-btn" title="Save Note">💾</button>   
+                <!--p id="recording-instructions">ggf. Spracherkennung im Browser authorisieren</p-->
+                
+                <h3>Meine Notizen/Nachrichten</h3>
+                <ul id="notes">
+                    <li>
+                        <p class="no-notes">Keine Nachricht/Notiz</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+ <div>
+   <ul id="containery">
+   </ul>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            try {
+              var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+              var recognitionN = new SpeechRecognition();
+            recognitionN.lang = 'de-DE';
+            }
+            catch(e) {
+              console.error(e);
+              $('.no-browser-support').show();
+              $('.app').hide();
+            }
+            
+            
+            var noteTextarea = $('#note-textarea');
+            var instructions = $('#recording-instructions');
+            var notesList = $('ul#notes');
+            
+            var noteContent = '';
+            
+            // Get all notes from previous sessions and display them.
+            var notes = getAllNotes();
+            renderNotes(notes);
+
+
+            /*-----------------------------
+                  Voice Recognition 
+            ------------------------------*/
+            
+            // If false, the recording will stop after a few seconds of silence.
+            // When true, the silence period is longer (about 15 seconds),
+            // allowing us to keep recording even when the user pauses. 
+            
+            recognitionN.continuous = true;
+            
+            // This block is called every time the Speech APi captures a line. 
+            recognitionN.onresult = function(event) {
+            
+              // event is a SpeechRecognitionEvent object.
+              // It holds all the lines we have captured so far. 
+              // We only need the current one.
+              var current = event.resultIndex;
+            
+              // Get a transcript of what was said.
+              var transcript = event.results[current][0].transcript;
+            
+              // Add the current transcript to the contents of our Note.
+              // There is a weird bug on mobile, where everything is repeated twice.
+              // There is no official solution so far so we have to handle an edge case.
+              var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
+            
+              if(!mobileRepeatBug) {
+                noteContent += transcript;
+                noteTextarea.val(noteContent);
+              }
+            };
+            
+            recognitionN.onstart = function() { 
+              instructions.text('Spracherkennung aktiviert. Sprich ins Mikrofon.');
+            }
+            
+            recognitionN.onspeechend = function() {
+              instructions.text('kein weiterer Input? Spracherkennung wird deaktiviert');
+            }
+            
+            recognitionN.onerror = function(event) {
+              if(event.error == 'no-speech') {
+                instructions.text('Spracherkennung kann keine Sprache erkennen. Versuch es noch einmal.');  
+              };
+            }            
+            
+            
+            /*-----------------------------
+                  App buttons and input 
+            ------------------------------*/
+            
+            $('#start-record-btn').on('click', function(e) {
+              if (noteContent.length) {
+                noteContent += ' ';
+              }
+              recognitionN.start();
+            });
+            
+            
+            $('#pause-record-btn').on('click', function(e) {
+              recognitionN.stop();
+              instructions.text('Voice recognition paused.');
+            });
+            
+            // Sync the text inside the text area with the noteContent variable.
+            noteTextarea.on('input', function() {
+              noteContent = $(this).val();
+            })
+            noteTextarea.on('focus', function() {
+              noteContent = $(this).val();
+            })
+            
+            $('#save-note-btn').on('click', function(e) {
+              recognitionN.stop();
+            
+              if(!noteContent.length) {
+                instructions.text('Leere Notiz kann nicht gespeichert werden. Text in Nachricht eingeben.');
+              }
+              else {
+                // Save note to localStorage.
+                // The key is the dateTime with seconds, the value is the content of the note.
+                saveNote(new Date().toLocaleString(), noteContent);
+            
+                // Reset variables and update UI.
+                noteContent = '';
+                renderNotes(getAllNotes());
+                noteTextarea.val('');
+                instructions.text('erfolgreich gespeichert!');
+              }
+                  
+            })
+            
+            
+            notesList.on('click', function(e) {
+              e.preventDefault();
+              var target = $(e.target);
+            
+              // Listen to the selected note.
+              if(target.hasClass('listen-note')) {
+                var content = target.closest('.note').find('.content').text();
+                readOutLoud(content);
+              }
+            
+              // Delete note.
+              if(target.hasClass('delete-note')) {
+                var dateTime = target.siblings('.date').text();  
+                deleteNote(dateTime);
+                target.closest('.note').remove();
+              }
+                          // Select note.
+              if(target.hasClass('sel-note')) {
+                let containery = document.getElementById("containery");
+                 var content = target.closest('.note').find('.content').text();
+             containery.innerHTML+= '<li>'+content+' </li>';
+              document.getElementById("note-textarea").value = containery.innerText; document.getElementById("note-textarea").focus();
+              }  
+            });
+                       
+            
+            /*-----------------------------
+                  Speech Synthesis 
+            ------------------------------*/
+            
+            function readOutLoud(message) {
+                var speech = new SpeechSynthesisUtterance();
+            
+              // Set the text and voice attributes.
+                speech.lang = 'de-DE';
+                speech.text = message;
+                speech.volume = 1;
+                speech.rate = 0.85;
+                speech.pitch = 1;
+                window.speechSynthesis.speak(speech);
+            }
+            
+                         
+            /*-----------------------------
+                  Helper Functions 
+            ------------------------------*/
+            
+            function renderNotes(notes) {
+              var html = '';
+              if(notes.length) {
+                notes.forEach(function(note) {
+                  html+= `<li class="note"><p class="header"><span class="date">${note.date}</span><a href="#" class="listen-note" title="Listen to Note">Notiz anhören</a><a href="#" class="delete-note" title="Delete">löschen</a><a href="#" class="sel-note" title="Sel">select</a> <p class="content">${note.content}</p></p> </li>`;   
+                });
+              }
+              else {
+                html = '<li><p class="content">You don\'t have any notes yet.</p></li>';
+              }
+              notesList.html(html);
+            }
+                        
+            function saveNote(dateTime, content) {
+              localStorage.setItem('note-' + dateTime, content);
+            }
+            
+            
+            function getAllNotes() {
+              var notes = [];
+              var key;
+              for (var i = 0; i < localStorage.length; i++) {
+                key = localStorage.key(i);
+            
+                if(key.substring(0,5) == 'note-') {
+                  notes.push({
+                    date: key.replace('note-',''),
+                    content: localStorage.getItem(localStorage.key(i))
+                  });
+                } 
+              }
+              return notes;
+            }
+                        
+            function deleteNote(dateTime) {
+              localStorage.removeItem('note-' + dateTime); 
+            }
+ 
         </script>
 </html>
-
