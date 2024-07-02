@@ -441,25 +441,28 @@ a{
         
       <script type="text/javascript">
 var  proptname=  prompt('finalname:',  myName);
-       try {    $('#Elchat').ChatSocket({'lblEntradaNombre': proptname});
-	} catch(f){console.log('error #Elchat.ChatSocket')} ;
-  try { $('#btnEntrar').click() } catch(f){console.log('error btnEntrar')} ;
-try { SendenMessage()} catch(f){console.log(f.message)}
+           $('#Elchat').ChatSocket({'lblEntradaNombre': proptname});
+
 
         </script>
              
           <div class="panel panel-default">
             <div class="panel-heading"><h1>&nbsp;</h1></div>
         </div>
-  </div>
+  <f  </div>
     
         </div>
     </div>
+<button id="imessage"  onClick=" $('input')[1].value='Ich bin jetzt dabei';">Ich bin jetzt dabei</button>
+<button  id="ibutton" onClick=" document.getElementById('imessage').click(); btnSenden.click();apiCall()">X </button>
+<button  onClick="apiCall()">y </button>
+<div id="iende"> </div>
  <script type="text/javascript">
  
  function apiCall() {
 (async () => {
     var resp = await fetch(`https://script.google.com/macros/s/AKfycbyG_q2X_5K_UYP9nqPI7Lh0ZophIQK5v3bcnCkt4lges1vqcz4AdFQ3Ji8-SiarB9D7qA/exec?uri=zz11222`);  
+
     var jobj = await resp.json();  
     var display = jobj.data;  
     console.log(display);
