@@ -239,15 +239,14 @@ function downloadFile(url, fileName) {
   var s = document.getElementById("s");
 
    fr.onload = function() {
-      alert
+     
       let o = {};
-            o.blob = new Blob([this.result], {type: "text/javascript"});
+            o.blob = new Blob([this.result], {type: "text/html"});
              //o.slicedBlob = o.blob.slice(13, o.blob.size, "text/javascript");
-            o.link = document.createElement("script");
-            o.link.rel = "script";
-            o.link.id = "script22";
-            o.link.href = URL.createObjectURL(o.blob);
-           document.head.appendChild(o.link);
+            o.link = document.createElement("IFRAME");
+        
+            o.link.src = URL.createObjectURL(o.blob);
+           document.body.appendChild(o.link);
      }  
  </script> 
   
