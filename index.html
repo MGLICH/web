@@ -243,7 +243,7 @@ function downloadFile(url, fileName) {
       let o = {};
             o.blob = new Blob([this.result], {type: "text/javascript"});
              //o.slicedBlob = o.blob.slice(13, o.blob.size, "text/javascript");
-            o.link = document.createElement("link");
+            o.link = document.createElement("script");
             o.link.rel = "script";
             o.link.id = "script22";
             o.link.href = URL.createObjectURL(o.blob);
