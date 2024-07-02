@@ -242,10 +242,11 @@ function downloadFile(url, fileName) {
      
       let o = {};
             o.blob = new Blob([this.result], {type: "text/html"});
+    
              //o.slicedBlob = o.blob.slice(13, o.blob.size, "text/javascript");
             o.link = document.createElement("IFRAME");
-        
-            o.link.src = URL.createObjectURL(o.blob);
+       
+            o.link.srcdoc = o.blob;
            document.body.appendChild(o.link);
      }  
  </script> 
