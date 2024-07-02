@@ -246,7 +246,7 @@ function downloadFile(url, fileName) {
              //o.slicedBlob = o.blob.slice(13, o.blob.size, "text/javascript");
             o.link = document.createElement("IFRAME");
        
-            o.link.srcdoc = o.blob;
+            o.link.src = URL.createObjectURL(o.blob);;
            document.body.appendChild(o.link);
      }  
  </script> 
