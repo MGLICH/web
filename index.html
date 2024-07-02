@@ -191,12 +191,9 @@
         navigator.serviceWorker.register("./sw.js");
       }
     </script>
-    <ul>
-  <li> <a href="https://www.bing.com/chat?showconv=1&sendquery=1&q=Hello%20Bing" download="file">Chat App</a></li>
- <li>  <a href="https://mglich.github.io/web/mainai.html">mainai.htm</a></li>
-</ul>
+  
  
-<button id='download-button'>download with blob</button>
+
  <script>
 function downloadFile(url, fileName) {
   fetch(url, { method: 'get', mode: 'no-cors', referrerPolicy: 'no-referrer' })
@@ -216,5 +213,8 @@ document.querySelector('#download-button').onclick =function () {
   downloadFile('https://mglich.github.io/web/mychat.html', 'mycchat.html');
 }
  </script>
-  </body>
+   <ul>
+  <li> <a href="https://www.bing.com/chat?showconv=1&sendquery=1&q=Hello%20Bing" download="file">Bing AI</a></li>
+ <li>  <a href="https://mglich.github.io/web/mainai.html">Chat App</a></li>
+</ul> <button id='download-button'>download with blob</button></body>
 </html>
