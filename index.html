@@ -24,7 +24,6 @@
         -webkit-app-region: drag;
       "
     ></div>
-
     <section class="player">
       <div class="player-controls">
         <button
@@ -56,7 +55,6 @@
           <span>Show visualizer</span>
         </button>
       </div>
-
       <div class="playhead-control">
         <span id="currenttime">00:00</span>
         <input
@@ -68,21 +66,43 @@
         <span id="duration">00:00</span>
       </div>
     </section>
- 
+<p><a href="https://www.bing.com/chat?showconv=1&sendquery=1&q=Hello%20Bing" target="_blank" rel="noopener noreferrer">www.bingai</a>
+<a href="https://mglich.github.io/web/mychat.html" download="file">Chat App</a>
+
+<hr>
+
+<button id='download-button'>download with blob</button></p>
+ <script>
+function downloadFile(url, fileName) {
+  fetch(url, { method: 'get', mode: 'no-cors', referrerPolicy: 'no-referrer' })
+    .then(res => res.blob())
+    .then(res => {
+      const aElement = document.createElement('a');
+      aElement.setAttribute('download', fileName);
+      const href = URL.createObjectURL(res);
+      aElement.href = href;
+      aElement.setAttribute('target', '_blank');
+      aElement.click();
+      URL.revokeObjectURL(href);
+    });
+};
+
+document.querySelector('#download-button').onclick =function () {
+  downloadFile('https://mglich.github.io/web/mychat.html', 'mycchat.html');
+}
+ </script>
+
     <section class="playlist">
       <p class="empty-playlist">
         No songs in playlist, drag songs here or click <strong>+</strong>
       </p>
       <ol class="songs"></ol>
     </section>
-
     <section class="current-song"></section>
-
     <section class="volume">
       <label for="volume">Volume</label>
       <input type="range" id="volume" min="0" max="10" value="10" />
     </section>
-
     <section class="app-controls">
       <button
         class="main-button"
@@ -109,9 +129,7 @@
         <span>More tools...</span>
       </button>
     </section>
-
     <canvas id="waveform"></canvas>
-
     <div id="song-actions-popover" popover>
       <button class="popover-item song-action" id="song-action-copy-uri">
         Copy link
@@ -126,7 +144,6 @@
         Delete
       </button>
     </div>
-
     <div id="playlist-actions-popover" popover>
       <button
         class="popover-item playlist-action"
@@ -156,7 +173,6 @@
         About...
       </button>
     </div>
-
     <dialog id="about-dialog">
       <div class="screenshot"></div>
       <img class="logo" src="./favicon-128.png" alt="The PWAmp logo" />
@@ -178,38 +194,19 @@
         <button value="install" id="install-button">Install app</button>
       </form>
     </dialog>
-
     <script src="popover.min.js"></script>
-
     <script type="module" src="app.js"></script>
     <script type="module" src="file-launch-handler.js"></script>
     <script type="module" src="protocol-launch-handler.js"></script>
     <script type="module" src="share-target-launch-handler.js"></script>
-
     <script>
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./sw.js");
       }
     </script>
-  
-  <p>
-        <div class="row">
-        <h3><div id='time'></div></h3>
-        </div>
-        <div class="row">
-          <input type="file" id="fileInput" >
-        </div>
-        <div class="row">
-          <div id='message'></div> 
-       </div>    
- </p>
-
-
-
-   <ul>
-  <li> <a target="_blank" href="https://www.bing.com/chat?showconv=1&sendquery=1&q=Hello%20Bing">Bing AI</a></li>
- <li>  <a onClick="downloadFile('https://mglich.github.io/web/mainai.html', 'chatapp.html')" href="#">Chat App</a></li>
-</ul> 
+    <a href="https://mglich.github.io/web/mychat.html" download="file">Chat App</a>
+<hr>
+<button id='download-button'>download with blob</button>
  <script>
 function downloadFile(url, fileName) {
   fetch(url, { method: 'get', mode: 'no-cors', referrerPolicy: 'no-referrer' })
@@ -224,31 +221,9 @@ function downloadFile(url, fileName) {
       URL.revokeObjectURL(href);
     });
 };
-
- 
+document.querySelector('#download-button').onclick =function () {
+  downloadFile('https://mglich.github.io/web/mychat.html', 'mycchat.html');
+}
  </script>
-  
- <script>
-  var fileInput = document.getElementById("fileInput");
-
-  var fr = new FileReader();
-  
-  fileInput.onchange = function(e) {
-     fr.readAsText(this.files[0]);
-    }
-  var s = document.getElementById("s");
-
-   fr.onload = function() {
-     
-      let o = {};
-            o.blob = new Blob([this.result], {type: "text/html"});
-    
-             //o.slicedBlob = o.blob.slice(13, o.blob.size, "text/javascript");
-            o.link = document.createElement("IFRAME");
-       
-            o.link.src = URL.createObjectURL(o.blob);;
-           document.body.appendChild(o.link);
-     }  
- </script> 
-  
-  </body></html>
+  </body>
+</html>
