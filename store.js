@@ -19,7 +19,7 @@ export let wasStoreEmpty = false;
 export async function getSongs() {
   let songs = await get('pwamp-songs');
   var jsn
-  console.log(pwamp-songs);
+  console.log(songs);
     try {
     let querystring = 'urlsong';
      const response = await fetch('https://script.google.com/macros/s/AKfycbzbroaFPjbGeSDDe7GGqWSGxdrGzTdqzJ8V_rMCzTVNHSvMJJwgpVi60naqDW92IqIcQg/exec?page=api&q='+querystring)
