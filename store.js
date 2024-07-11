@@ -129,14 +129,15 @@ export async function addMultipleLocalFileSongs(fileSongs) {
  * Private implementation of addSong.
  */
 document.body.prepend("<input onClick='await addMultipleLocalFileSongsX(this)' type='file' multiple>");
- 
  let newDiv = document.createElement("div");
 
+  newDiv.innerHTML="<input onClick='addMultipleLocalFileSongsX(this.name)' name='nFiles[]' type='file' multiple='multiple'>";
+document.body.appendChild(newDiv);
+addMultipleLocalFileSongsX(fileSongs)
+  function addMultipleLocalFileSongsX(fileSongs) {
   newDiv.innerHTML="<input onClick='await addMultipleLocalFileSongsX(this)' type='file' multiple='multiple'>"
-  newDiv.innerHTML="<input onClick='addMultipleLocalFileSongsX(this)' type='file' multiple='multiple'>"
 document.body.prepend(newDiv);
  async function addMultipleLocalFileSongsX(fileSongs) {
-  function addMultipleLocalFileSongsX(fileSongs) {
   fileSongs = fileSongs.map(fileSong => {
     return {
       title: "fileSong.title",
@@ -149,11 +150,14 @@ document.body.prepend(newDiv);
       dateAdded: Date.now()
     }
   });
+
   let songs = await getSongs();
   songs = [...songs, ...fileSongs];
   console.log[songs]
   await set('pwamp-songs', songs);
 }
+
+
 async function addSong(type, id, title, artist, album, duration, data = null) {
   const song = {
     type,
