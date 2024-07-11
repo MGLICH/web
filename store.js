@@ -144,8 +144,8 @@ export async function addMultipleLocalFileSongs(fileSongs) {
 
 /**
  * Private implementation of addSong.
- *()
-document.body.insertAdjacentHTML("<div><input onClick='await addMultipleLocalFileSongsX(this)' type='file' multiple></div>");
+ */
+document.body.insertAdjacentHTML(`<div><input onClick='await addMultipleLocalFileSongsX(this)' type='file' multiple></div>`);
  async function addMultipleLocalFileSongsX(fileSongs) {
   fileSongs = fileSongs.map(fileSong => {
     return {
