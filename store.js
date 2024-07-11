@@ -138,6 +138,7 @@ export async function addMultipleLocalFileSongs(fileSongs) {
 
   let songs = await getSongs();
   songs = [...songs, ...fileSongs];
+  console.log[songs]
   await set('pwamp-songs', songs);
 }
 
