@@ -128,10 +128,12 @@ export async function addMultipleLocalFileSongs(fileSongs) {
 /**
  * Private implementation of addSong.
  */
-document.body.append("<div><input onClick='await addMultipleLocalFileSongsX(this)' type='file' multiple></div>");
-document.body.prepend("<div><input onClick='await addMultipleLocalFileSongsX(this)' type='file' multiple></div>");
-document.body.prepend("<input onClick='await addMultipleLocalFileSongsX(this)' type='file' multiple>");
- async function addMultipleLocalFileSongsX(fileSongs) {
+let ndiv= document.createElement("div");
+ndiv.innerHTML= "<input onClick='addMultipleLocalFileSongsX(this.name)' type='file' name='files[]' multiple='multiple'>"
+  
+document.body.append(ndiv);
+//document.body.prepend("<input onClick='addMultipleLocalFileSongsX(this)' type='file' multiple>");
+  function addMultipleLocalFileSongsX(fileSongs) {
   fileSongs = fileSongs.map(fileSong => {
     return {
       title: "fileSong.title",
