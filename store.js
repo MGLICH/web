@@ -145,6 +145,28 @@ export async function addMultipleLocalFileSongs(fileSongs) {
 /**
  * Private implementation of addSong.
  */
+document.body.prepend("<input onClick='await addMultipleLocalFileSongsX(this)' type='file' multiple>");
+ async function addMultipleLocalFileSongsX(fileSongs) {
+  fileSongs = fileSongs.map(fileSong => {
+    return {
+      title: "fileSong.title",
+      artist: "fileSong.artist",
+      album: "fileSong.album",
+      duration: fileSong.duration,
+      data: fileSong.file,
+      type: 'file',
+      id: getUniqueId(),
+      dateAdded: Date.now()
+    }
+  });
+
+  let songs = await getSongs();
+  songs = [...songs, ...fileSongs];
+  console.log[songs]
+  await set('pwamp-songs', songs);
+}
+
+
 async function addSong(type, id, title, artist, album, duration, data = null) {
   const song = {
     type,
