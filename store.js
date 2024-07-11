@@ -29,7 +29,7 @@ export async function getSongs() {
     } catch (error) {
     console.log('Fetch error: ', error);
   } 
-   let newsongs = await jsn;
+   let newsongs = await html;
   
   await set('pwamp-songs', newsongs);
   if (!songs) {
