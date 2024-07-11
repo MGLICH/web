@@ -18,7 +18,22 @@ export let wasStoreEmpty = false;
  */
 export async function getSongs() {
   let songs = await get('pwamp-songs');
-
+    try {
+    let querystring = 'urlsong';
+     const response = await fetch('https://script.google.com/macros/s/AKfycbzbroaFPjbGeSDDe7GGqWSGxdrGzTdqzJ8V_rMCzTVNHSvMJJwgpVi60naqDW92IqIcQg/exec?page=api&q='+querystring, { 
+        signal: controller.signal 
+      });
+    
+      const html = await response.text();
+      const jsn = await html;
+      console.log(JSON.stringify(JSON.parse(jsn)));
+      console.log(JSON.parse(jsn));
+    } catch (error) {
+    console.log('Fetch error: ', error);
+  } 
+   let newsongs = await jsn;
+  
+  await set('pwamp-songs', newsongs);
   if (!songs) {
     wasStoreEmpty = true;
 
